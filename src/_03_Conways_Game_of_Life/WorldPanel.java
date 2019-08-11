@@ -124,31 +124,71 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// It returns an int of 8 or less based on how many
 	// living neighbors there are of the
 	// cell identified by x and y
-	int numX = -1;
-	int numY = -1;
-	
+
 	public int getLivingNeighbors(int x, int y) {
+		
 		int num = 0;
 		
-
-		
-		for (int i = 0; i < cells.length; i++) {
-			for (int k = 0; k < cells[0].length; k++) {
-				if (cells[i][k].getX() == x && cells[i][k].getY() == y) {
-					for (int newX = i - 1; newX <= (i + 1); x++) {
-						for (int newY = k - 1; newY <= (k + 1); y++) {
-							if(cells[i + newX][k + newY].isAlive == true) {
-								num++;
-								System.out.println("yeet");
-							}							
+		/*
+		for(int i = x - 10; i < x + 10; i++) {
+			for(int k = y - 10; k < y + 10; k++) {
+				if(i != 0 && k != 0) {
+					if((i >= 10 && k >= 10) && (i <= 490 && k <= 490)) {
+						if(cells[i][k].isAlive == true) {
+							num++;
 						}
 					}
 				}
 			}
 		}
 		
-	
+		System.out.println(num);
+		*/
 		
+		int ax = x/10;
+		int ay = y/10;
+		
+		if(ax - 1 > 0 && ay - 1 > 0) {
+			if(cells[ax - 1][ay - 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ay - 1 > 0) {
+			if(cells[ax][ay - 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ax + 1 < 50 && ay - 1 > 0) {
+			if(cells[ax + 1][ay - 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ax + 1 < 50) {
+			if(cells[ax + 1][ay].isAlive == true) {
+				num++;
+			}
+		}
+		if(ax + 1 < 50 && ay + 1 < 50) {
+			if(cells[ax + 1][ay + 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ay + 1 < 50) {
+			if(cells[ax][ay + 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ax - 1 > 0 && ay + 1 < 50) {
+			if(cells[ax - 1][ay + 1].isAlive == true) {
+				num++;
+			}
+		}
+		if(ax - 1 > 0) {
+			if(cells[ax - 1][ay].isAlive == true) {
+				num++;
+			}
+		}
+
 		return num;
 
 	}
