@@ -129,22 +129,6 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		
 		int num = 0;
 		
-		/*
-		for(int i = x - 10; i < x + 10; i++) {
-			for(int k = y - 10; k < y + 10; k++) {
-				if(i != 0 && k != 0) {
-					if((i >= 10 && k >= 10) && (i <= 490 && k <= 490)) {
-						if(cells[i][k].isAlive == true) {
-							num++;
-						}
-					}
-				}
-			}
-		}
-		
-		System.out.println(num);
-		*/
-		
 		int ax = x/10;
 		int ay = y/10;
 		
@@ -218,15 +202,17 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 
 		int x = e.getX();
 		int y = e.getY();
-
-		for (int i = 0; i < cells.length; i++) {
-			for (int k = 0; k < cells[0].length; k++) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-
+		
+		for(int i = 0; i < cells.length; i++) {
+			for(int k = 0; k < cells[0].length; k++) {
+				if(e.getButton() == MouseEvent.BUTTON1) {
+					if((x >= (cells[i][k].getX()) && x < cells[i + 1][k].getX()) && (y >= (cells[i][k].getY()) && (y < cells[i][k + 1].getY()))) {
+						cells[i][k].isAlive = true;
+					}
 				}
 			}
 		}
-
+		
 		repaint();
 	}
 
